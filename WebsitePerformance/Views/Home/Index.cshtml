@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <p>Enter the URL of interested website, and you'll see all pages and their response time:</p>
+            @using (Html.BeginForm("WebsitePerformance", "Home"))
+            {
+                <input type="url" name="uri" class="form-control col-md-3" placeholder="http://www.example.com"/>
+                <input type="submit" class="btn btn-primary col-md-2" value="submit" />
+            }
+        </div>
+        <div class="col-md-6">
+            <p>Here is you can see websites, you measured before:</p>
+            @using (Html.BeginForm("History", "Home"))
+            {
+                @Html.DropDownList("websiteId", (IEnumerable<SelectListItem>)ViewBag.WebsitesList, new { @class = "form-control col-md-3" })
+                <input type="submit" class="btn btn-primary col-md-2" value="submit">
+            }
+        </div>
+    </div>
+</div>

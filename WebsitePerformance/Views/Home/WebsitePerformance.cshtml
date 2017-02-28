@@ -1,0 +1,31 @@
+﻿@model WebsitePerformance.Models.WebsiteViewer
+
+@{
+    ViewBag.Title = "Website Performance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(Model.Highchart)
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-10">Pages</th>
+                    <th class="col-md-2">Response Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (WebsitePerformance.Models.Page page in Model.Website.Pages.OrderByDescending(p => p.ResponseTime))
+                {
+                    <tr>
+                        <td class="col-md-10">@page.Uri</td>
+                        <td class="col-md-2">@page.ResponseTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@Scripts.Render("~/bundles/highChart")
